@@ -10,7 +10,9 @@ public class PowTest {
 
         double result = Pow.calculate(5, 3);
 
-        assertEquals(125, result, 1E-1);
+        assertEquals(125, result, 1E-5);
+
+        assert Double.compare(125, result) == 0;
 
     }
 
