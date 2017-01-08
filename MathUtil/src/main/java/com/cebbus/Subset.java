@@ -8,9 +8,9 @@ import java.util.List;
  * Created by cebbus on 10.12.2016.
  * Find subsets
  */
-public class Subset {
+class Subset {
 
-    private static void fillSubsetBinaryList(List<int[]> subsetList, int[] subset, int order) {
+    static void fillSubsetBinaryList(List<byte[]> subsetList, byte[] subset, int order) {
 
         if (order == subset.length) {
             subsetList.add(Arrays.copyOf(subset, subset.length));
@@ -25,17 +25,17 @@ public class Subset {
 
     }
 
-    public static<T> List<ArrayList<T>> findSubsets(List<T> cluster) {
+    static<T> List<ArrayList<T>> findSubsets(List<T> cluster) {
 
-        int[] binaryList = new int[cluster.size()];
+        byte[] binaryList = new byte[cluster.size()];
 
         int subsetSize = (int) Pow.calculate(2, cluster.size());
-        List<int[]> subsetList = new ArrayList<>(subsetSize);
+        List<byte[]> subsetList = new ArrayList<>(subsetSize);
 
         fillSubsetBinaryList(subsetList, binaryList, 0);
 
         List<ArrayList<T>> resultList = new ArrayList<>(subsetList.size());
-        for (int[] subsetBinary : subsetList) {
+        for (byte[] subsetBinary : subsetList) {
 
             ArrayList<T> subset = new ArrayList<>();
 

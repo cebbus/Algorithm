@@ -7,7 +7,7 @@ import java.util.List;
  * Created by cebbus on 26.11.2016.
  * Find hamming numbers
  */
-public class Hamming {
+class Hamming {
 
     private static boolean isHamming(int number) {
 
@@ -24,7 +24,7 @@ public class Hamming {
         return false;
     }
 
-    public static List<Integer> findHammingNumbers(int number) {
+    static List<Integer> findHammingNumbers(int number) {
 
         if (number < 1) {
             throw new IllegalArgumentException("Number must be greater than 1.");
