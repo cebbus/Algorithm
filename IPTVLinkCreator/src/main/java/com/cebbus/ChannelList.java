@@ -23,6 +23,7 @@ public enum ChannelList {
     STARTV (new STARTV()),
     FOXTV (new FoxTV()),
     NTV (new NTV()),
+    EURONEWS (new EURONEWS()),
     ATV (new ATV());
 
 

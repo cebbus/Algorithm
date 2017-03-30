@@ -37,18 +37,15 @@ public class IPTVFileCreator {
         return linkBuilder.toString();
     }
 
-    public static void main(String[] args) {
-
-        String channelList = createChannelLinkList();
-
-        /*
+    private static void createFileToDesktop(String channelList) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))){
             bw.write(channelList);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
+    }
 
+    private static void uploadFileToYandex(String channelList) {
         Sardine sardine = SardineFactory.begin("", "");
         byte[] data = channelList.getBytes();
 
@@ -57,6 +54,17 @@ public class IPTVFileCreator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+
+        String channelList = createChannelLinkList();
+
+        /*
+        createFileToDesktop(channelList);
+        */
+
+        uploadFileToYandex(channelList);
     }
 
 }
