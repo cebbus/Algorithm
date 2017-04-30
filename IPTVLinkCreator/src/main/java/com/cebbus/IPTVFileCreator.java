@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Created by cebbus on 26.03.2017.
@@ -46,14 +47,32 @@ public class IPTVFileCreator {
     }
 
     private static void writeFile(String channelList){
+        BufferedWriter bw = null;
 
-        File jarDir = new File(ClassLoader.getSystemClassLoader()
-                .getResource(".").getPath() + FILE_NAME);
+        try {
+            String path = IPTVFileCreator.class.getProtectionDomain()
+                    .getCodeSource().getLocation().toURI().getPath();
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(jarDir))){
+            path = path.substring(0, path.lastIndexOf("/"));
+
+            System.out.println(path);
+
+            File file = new File(path + FILE_NAME);
+
+            FileWriter fw = new FileWriter(file);
+            bw = new BufferedWriter(fw);
+
             bw.write(channelList);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
+        } finally {
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
