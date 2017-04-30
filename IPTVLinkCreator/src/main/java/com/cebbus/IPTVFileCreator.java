@@ -28,12 +28,15 @@ public class IPTVFileCreator {
             try {
                 LinkCreator creator = channel.getCreator();
 
-                linkBuilder.append("#EXTINF:-1, ").append(creator.getChannelName());
+                String channelName = creator.getChannelName();
+                String link = creator.createLink();
+
+                linkBuilder.append("#EXTINF:-1, ").append(channelName);
                 linkBuilder.append(System.lineSeparator());
-                linkBuilder.append(creator.createLink());
+                linkBuilder.append(link);
                 linkBuilder.append(System.lineSeparator());
 
-                System.out.println(creator.getChannelName());
+                System.out.println(channelName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
