@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class IPTVFileCreator {
 
-    private static final String FILE_NAME = System.getProperty("user.home") + "/Desktop/channelList.m3u";
+    private static final String FILE_NAME = "/channelList.m3u";
 
     private static String createChannelLinkList() {
 
@@ -22,30 +22,39 @@ public class IPTVFileCreator {
         linkBuilder.append("#EXTM3U");
         linkBuilder.append(System.lineSeparator());
 
-
         ChannelList[] values = ChannelList.values();
 
         for (ChannelList channel : values) {
-            LinkCreator creator = channel.getCreator();
+            try {
+                LinkCreator creator = channel.getCreator();
 
-            linkBuilder.append("#EXTINF:-1, ").append(creator.getChannelName());
-            linkBuilder.append(System.lineSeparator());
-            linkBuilder.append(creator.createLink());
-            linkBuilder.append(System.lineSeparator());
+                linkBuilder.append("#EXTINF:-1, ").append(creator.getChannelName());
+                linkBuilder.append(System.lineSeparator());
+                linkBuilder.append(creator.createLink());
+                linkBuilder.append(System.lineSeparator());
+
+                System.out.println(creator.getChannelName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return linkBuilder.toString();
     }
 
-    private static void createFileToDesktop(String channelList) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))){
+    private static void writeFile(String channelList){
+
+        File jarDir = new File(ClassLoader.getSystemClassLoader()
+                .getResource(".").getPath() + FILE_NAME);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(jarDir))){
             bw.write(channelList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void uploadFileToYandex(String channelList) {
+    private static void uploadFile(String channelList) {
         Sardine sardine = SardineFactory.begin("", "");
         byte[] data = channelList.getBytes();
 
@@ -60,11 +69,9 @@ public class IPTVFileCreator {
 
         String channelList = createChannelLinkList();
 
-        /*
-        createFileToDesktop(channelList);
-        */
+        writeFile(channelList);
 
-        uploadFileToYandex(channelList);
+        //uploadFile(channelList);
     }
 
 }

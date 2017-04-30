@@ -12,7 +12,7 @@ public class ATV extends LinkCreator {
 
     @Override
     public String createLink() {
-        String source = downloadSource("https://www.canlitvlive.live/izle/atv.html");
+        String source = downloadSource("https://www.canlitvlive.live/izle/hd-atv.html");
         source = source.substring(source.indexOf("file:"), source.length());
         source = source.replaceAll("file:\"", "http:");
         source = source.substring(0, source.indexOf("\""));
