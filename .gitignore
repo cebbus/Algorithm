@@ -1,1 +1,6 @@
 *.iml
+.idea/
+out/
+MathUtil/target/
+RandomUtil/target/
+IPTVLinkCreator/target/
