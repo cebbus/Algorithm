@@ -1,2 +1,2 @@
 # Algorithm
-Algorithm studies
+Algorithm studies, random number generators...
